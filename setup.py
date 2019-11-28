@@ -46,10 +46,10 @@ else:
     ext_modules = []
 
 setup(
-    name="black",
+    name="black-2spaces",
     use_scm_version={
         "write_to": "src/_black_version.py",
-        "write_to_template": 'version = "{version}"\n',
+        "write_to_template": 'version = "19.11.28"\n',
     },
     description="The uncompromising code formatter.",
     long_description=get_long_description(),
