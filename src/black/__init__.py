@@ -794,7 +794,7 @@ def format_file_in_place(
         mode = replace(mode, is_pyi=True)
 
     then = datetime.utcfromtimestamp(src.stat().st_mtime)
-    with open(src, "rb") as buf:
+    with open(str(src), "rb") as buf:
         src_contents, encoding, newline = decode_bytes(buf.read())
     try:
         dst_contents = format_file_contents(src_contents, fast=fast, mode=mode)
@@ -802,7 +802,7 @@ def format_file_in_place(
         return False
 
     if write_back == WriteBack.YES:
-        with open(src, "w", encoding=encoding, newline=newline) as f:
+        with open(str(src), "w", encoding=encoding, newline=newline) as f:
             f.write(dst_contents)
     elif write_back in (WriteBack.DIFF, WriteBack.COLOR_DIFF):
         now = datetime.utcnow()
@@ -6463,7 +6463,7 @@ def write_cache(cache: Cache, sources: Iterable[Path], mode: Mode) -> None:
         new_cache = {**cache, **{src.resolve(): get_cache_info(src) for src in sources}}
         with tempfile.NamedTemporaryFile(dir=str(cache_file.parent), delete=False) as f:
             pickle.dump(new_cache, f, protocol=4)
-        os.replace(f.name, cache_file)
+        os.replace(f.name, str(cache_file))
     except OSError:
         pass
 

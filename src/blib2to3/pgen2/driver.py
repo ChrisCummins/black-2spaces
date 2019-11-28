@@ -175,7 +175,7 @@ def _generate_pickle_name(gt: Path, cache_dir: Optional[Path] = None) -> Text:
         tail = ""
     name = head + tail + ".".join(map(str, sys.version_info)) + ".pickle"
     if cache_dir:
-        return os.path.join(cache_dir, os.path.basename(name))
+        return os.path.join(str(cache_dir), os.path.basename(name))
     else:
         return name
 
