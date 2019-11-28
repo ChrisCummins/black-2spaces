@@ -6459,7 +6459,9 @@ def write_cache(cache: Cache, sources: Iterable[Path], mode: Mode) -> None:
     """Update the cache file."""
     cache_file = get_cache_file(mode)
     try:
-        CACHE_DIR.mkdir(parents=True, exist_ok=True)
+        # FIXME: For some reason, the 'exist_ok=True' argument raises a type
+        # error here, despite this being a PosixPath instance.
+        CACHE_DIR.mkdir(parents=True)
         new_cache = {**cache, **{src.resolve(): get_cache_info(src) for src in sources}}
         with tempfile.NamedTemporaryFile(dir=str(cache_file.parent), delete=False) as f:
             pickle.dump(new_cache, f, protocol=4)
