@@ -59,7 +59,7 @@ from blib2to3.pgen2 import driver, token
 from blib2to3.pgen2.grammar import Grammar
 from blib2to3.pgen2.parse import ParseError
 
-from _black_version import version as __version__
+__version__ = "19.11.29"
 
 if TYPE_CHECKING:
     import colorama  # noqa: F401
